@@ -57,6 +57,7 @@ const addDateSuffix = date => {
     }
   
     const dateObj = new Date(timestamp);
+  
     const formattedMonth = months[dateObj.getMonth()];
   
     let dayOfMonth;
@@ -76,11 +77,12 @@ const addDateSuffix = date => {
     } else {
       hour = dateObj.getHours();
     }
-    // if hour is 0 (12:00am), change it to 12
+    // if hour is 0 (12:00am), change it to     
     if (hour === 0) {
       hour = 12;
     }
-  
+
+
     const minutes = dateObj.getMinutes();
   
     // set `am` or `pm`

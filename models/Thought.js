@@ -1,11 +1,11 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 const formatDate = require('../utils/formatDate');
 
 const ReactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: () => new ObjectId()
+            default: () => new Types.ObjectId()
         },
         reactionBody: {
             type: String,
@@ -14,7 +14,7 @@ const ReactionSchema = new Schema(
         },
         username: {
             type: String,
-            required: 'You must include a username',
+            required: 'You must include your username',
         },
         createdAt: {
             type: Date,
@@ -25,9 +25,11 @@ const ReactionSchema = new Schema(
     {
         toJSON: {
             getters: true
-        }
+        },
+        id: false,
+        _id: false
     }
-)
+);
 
 
 
@@ -44,12 +46,10 @@ const ThoughtSchema = new Schema(
             default: Date.now,
             get: createdAtVal => formatDate(createdAtVal)
         },
-        username: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
+        username: {
+            type: String,
+            required: 'You must include a your username',
+        },
         reactions: [ReactionSchema]
     },
     {
@@ -57,7 +57,7 @@ const ThoughtSchema = new Schema(
             virtuals: true,
             getters: true,
         },
-        id: false
+        id: false,
     }
 );
 
